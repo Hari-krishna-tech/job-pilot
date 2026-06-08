@@ -108,7 +108,7 @@ export function SearchControls() {
                   setResult(null);
                   setError(null);
                 }}
-                placeholder="Remote, New York..."
+                placeholder="Bengaluru, Remote, Mumbai..."
                 className="w-full rounded-md border border-border bg-surface py-2 pl-10 pr-3 text-sm text-text-primary placeholder:text-text-muted focus:border-accent focus:ring-1 focus:ring-accent focus:outline-none"
               />
             </div>

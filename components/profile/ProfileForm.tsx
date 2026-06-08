@@ -277,7 +277,7 @@ export function ProfileForm({ initialData, resumeUrl }: Props) {
               type="text"
               value={form.fullName}
               onChange={(e) => updateField("fullName", e.target.value)}
-              placeholder="John Doe"
+              placeholder="Aarav Sharma"
               className={inputClass}
             />
           </div>
@@ -296,7 +296,7 @@ export function ProfileForm({ initialData, resumeUrl }: Props) {
               type="tel"
               value={form.phone}
               onChange={(e) => updateField("phone", e.target.value)}
-              placeholder="+1 (555) 000-0000"
+              placeholder="+91 98765 43210"
               className={inputClass}
             />
           </div>
@@ -306,7 +306,7 @@ export function ProfileForm({ initialData, resumeUrl }: Props) {
               type="text"
               value={form.location}
               onChange={(e) => updateField("location", e.target.value)}
-              placeholder="San Francisco, CA"
+              placeholder="Bengaluru, KA"
               className={inputClass}
             />
           </div>
@@ -670,7 +670,7 @@ export function ProfileForm({ initialData, resumeUrl }: Props) {
               onChange={(e) =>
                 updateField("salaryExpectation", e.target.value)
               }
-              placeholder="$120,000 - $150,000"
+              placeholder="₹12,00,000 - ₹25,00,000"
               className={inputClass}
             />
           </div>
