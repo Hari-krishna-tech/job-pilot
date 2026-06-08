@@ -36,37 +36,27 @@ Two separate instances — never mix them:
 
 ```typescript
 // lib/insforge-client.ts — browser context only
-import { createBrowserClient } from "@insforge/ssr";
+import { createBrowserClient } from "@insforge/sdk/ssr";
 
-export const insforge = createBrowserClient(
-  process.env.NEXT_PUBLIC_INSFORGE_URL!,
-  process.env.NEXT_PUBLIC_INSFORGE_ANON_KEY!,
-);
+export const insforge = createBrowserClient({
+  refreshUrl: "/api/auth/refresh",
+});
 ```
 
 ```typescript
 // lib/insforge-server.ts — server context only
-import { createServerClient } from "@insforge/ssr";
 import { cookies } from "next/headers";
+import { createServerClient } from "@insforge/sdk/ssr";
 
 export const createInsforgeServer = async () => {
   const cookieStore = await cookies();
-  return createServerClient(
-    process.env.NEXT_PUBLIC_INSFORGE_URL!,
-    process.env.NEXT_PUBLIC_INSFORGE_ANON_KEY!,
-    {
-      cookies: {
-        getAll: () => cookieStore.getAll(),
-        setAll: (cookiesToSet) => {
-          cookiesToSet.forEach(({ name, value, options }) =>
-            cookieStore.set(name, value, options),
-          );
-        },
-      },
-    },
-  );
+  return createServerClient({
+    cookies: cookieStore,
+  });
 };
 ```
+
+URL and anon key are resolved automatically from `NEXT_PUBLIC_INSFORGE_URL` and `NEXT_PUBLIC_INSFORGE_ANON_KEY` env vars.
 
 **Rules:**
 
@@ -85,8 +75,39 @@ const insforge = await createInsforgeServer();
 const {
   data: { user },
   error,
-} = await insforge.auth.getUser();
+} = await insforge.auth.getCurrentUser();
 if (!user) redirect("/login");
+```
+
+### Auth — OAuth Login
+
+```typescript
+// Client-side OAuth login
+import { insforge } from "@/lib/insforge-client";
+
+const redirectTo = `${window.location.origin}/auth/callback`;
+await insforge.auth.signInWithOAuth("google", { redirectTo });
+```
+
+### Auth — Proxy (Session Refresh)
+
+```typescript
+// proxy.ts — Next.js 16 proxy for session refresh
+import { updateSession } from "@insforge/sdk/ssr";
+
+await updateSession({
+  requestCookies: request.cookies,
+  responseCookies: response.cookies,
+});
+```
+
+### Auth — Token Refresh Route
+
+```typescript
+// app/api/auth/refresh/route.ts
+import { createRefreshAuthRouter } from "@insforge/sdk/ssr";
+
+export const { POST } = createRefreshAuthRouter();
 ```
 
 ---

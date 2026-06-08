@@ -32,12 +32,13 @@
 │   ├── library-docs.md
 │   ├── build-plan.md
 │   └── progress-tracker.md
+├── proxy.ts                                 → Session refresh on every request
 ├── app/
 │   ├── layout.tsx                          → Root layout, PostHog provider
 │   ├── page.tsx                            → Homepage
 │   ├── (auth)/
 │   │   ├── login/
-│   │   │   └── page.tsx                   → Login page
+│   │   │   └── page.tsx                   → Login page (OAuth buttons)
 │   │   └── callback/
 │   │       └── page.tsx                   → OAuth callback handler
 │   ├── dashboard/
@@ -49,6 +50,9 @@
 │   │   └── [id]/
 │   │       └── page.tsx                   → Individual job details page
 │   └── api/
+│       ├── auth/
+│       │   └── refresh/
+│       │       └── route.ts              → Token refresh endpoint
 │       ├── agent/
 │       │   ├── find/route.ts              → Trigger Adzuna job discovery
 │       │   └── research/route.ts          → Trigger company research agent
@@ -292,9 +296,11 @@ Access: authenticated users only, own files only.
 - Provider: InsForge Auth
 - Methods: Google OAuth, GitHub OAuth
 - Protected routes: /dashboard, /profile, /find-jobs, /find-jobs/[id]
-- Public routes: /, /login
-- Middleware in middleware.ts checks session on every protected route
+- Public routes: /, /login, /auth/callback
+- Proxy in proxy.ts refreshes session on every request
+- Each protected page verifies user via `createInsforgeServer().auth.getCurrentUser()` and redirects to /login if unauthenticated
 - On login → redirect to /dashboard
+- OAuth callback at /auth/callback — browser client auto-detects `insforge_code`, exchanges for session, redirects to /dashboard
 
 ---
 
@@ -305,33 +311,21 @@ Two separate InsForge instances — never mix them:
 ```typescript
 // lib/insforge-client.ts
 // Browser-side — used in client components for auth state
-import { createBrowserClient } from "@insforge/ssr";
-export const insforge = createBrowserClient(
-  process.env.NEXT_PUBLIC_INSFORGE_URL!,
-  process.env.NEXT_PUBLIC_INSFORGE_ANON_KEY!,
-);
+import { createBrowserClient } from "@insforge/sdk/ssr";
+export const insforge = createBrowserClient({
+  refreshUrl: "/api/auth/refresh",
+});
 
 // lib/insforge-server.ts
 // Server-side — used in API routes, Server Actions, agent code
-import { createServerClient } from "@insforge/ssr";
+import { createServerClient } from "@insforge/sdk/ssr";
 import { cookies } from "next/headers";
 
 export const createInsforgeServer = async () => {
   const cookieStore = await cookies();
-  return createServerClient(
-    process.env.NEXT_PUBLIC_INSFORGE_URL!,
-    process.env.NEXT_PUBLIC_INSFORGE_ANON_KEY!,
-    {
-      cookies: {
-        getAll: () => cookieStore.getAll(),
-        setAll: (cookiesToSet) => {
-          cookiesToSet.forEach(({ name, value, options }) =>
-            cookieStore.set(name, value, options),
-          );
-        },
-      },
-    },
-  );
+  return createServerClient({
+    cookies: cookieStore,
+  });
 };
 ```
 

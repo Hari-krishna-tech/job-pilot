@@ -1,9 +1,18 @@
+import { Hero } from "@/components/homepage/Hero";
+import { HowItWorks } from "@/components/homepage/HowItWorks";
+import { Features } from "@/components/homepage/Features";
+import { Testimonial } from "@/components/homepage/Testimonial";
+import { CTASection } from "@/components/homepage/CTASection";
+
 const Home = () => {
   return (
-    <div>
-      <h1>Welcome to the Home Page</h1>
-      <p>This is the main landing page of the application.</p>
-    </div>
+    <>
+      <Hero />
+      <HowItWorks />
+      <Features />
+      <Testimonial />
+      <CTASection />
+    </>
   );
 };
 
