@@ -1,42 +1,45 @@
-# Memory — 04 Database Schema
+# Memory — Analytics Charts (Feature 17)
 
-Last updated: 2026-06-08
+Last updated: 2026-06-09
 
 ## What was built
 
-All 4 InsForge tables created with RLS policies:
-- `profiles` — 24 columns, FK to auth.users(id) RESTRICT, RLS SELECT/INSERT/UPDATE
-- `agent_runs` — 8 columns, FK to profiles RESTRICT, RLS SELECT/INSERT/UPDATE
-- `jobs` — 23 columns, source CHECK (search|url), FK to agent_runs SET NULL + profiles RESTRICT, RLS SELECT/INSERT/UPDATE/DELETE
-- `agent_logs` — 7 columns, level CHECK (info|success|warning|error), FK to agent_runs CASCADE + profiles RESTRICT + jobs SET NULL, RLS SELECT/INSERT
-
-Storage bucket `resumes` created — private, authenticated access only.
-
-`db/001_schema.sql` — version-controlled migration file.
-
-Phase 1 Foundation complete. Progress tracker updated.
+### Feature 17 — Analytics Charts Real Data
+- Installed recharts 3.8.1
+- `lib/analytics-events.ts` — added `COMPANY_RESEARCHED: "company_researched"`
+- `app/api/agent/research/route.ts` — fires `company_researched` alongside `company_dossier_generated`
+- `components/dashboard/JobsOverTimeChart.tsx` — line chart, last 30 days, `#7C5CFC`, empty state
+- `components/dashboard/MatchScoreDistributionChart.tsx` — bar chart, 5 score ranges, `#10B981`, empty state
+- `components/dashboard/CompanyResearchChart.tsx` — bar chart, last 7 days, `#61A8FF`, empty state
+- `components/dashboard/AnalyticsCharts.tsx` — fully rewritten as grid wrapper, all SVG code removed
+- `app/dashboard/page.tsx` — `fetchChartData()` aggregates 3 datasets from InsForge DB, passes to AnalyticsCharts
 
 ## Decisions made
 
-- RLS + app-level defense-in-depth: both layers enforce user scoping
-- profiles.id REFERENCES auth.users(id) with RESTRICT
-- Profile creation on-demand — no trigger. Feature 06 handles upsert
-- JSONB columns default NULL, text[] columns default '{}'
-- agent_logs.run_id CASCADE delete, agent_logs.job_id SET NULL on delete
-- jobs.run_id SET NULL on delete (jobs survive agent_run deletion)
+- Data source: InsForge DB instead of PostHog REST API — no new env vars, data is source of truth
+- Data aggregation: JS server-side (same pattern as feature 15 AVG match rate)
+- Chart components: `"use client"`, receive data as props, handle own empty states
+- All 30-day and 7-day windows filled with zeroes for continuous axes
+- Chart colors per ui-tokens.md dashboard chart colors
+- `ChartDatum` type exported from JobsOverTimeChart for dashboard page consumption
+
+## Problems solved
+
+None — build and type-check passed first run.
 
 ## Current state
 
-- Phase 1 (Foundation) fully complete: Homepage, Auth, PostHog, Database Schema
-- All 4 tables verified via get-table-schema, RLS policies confirmed, policies use `auth.uid()`
-- resumes bucket verified via list-buckets
-- PostHog review issues from earlier session still outstanding (not addressed this session)
+- Phase 1 (Auth, Homepage, PostHog, Schema): complete
+- Phase 2 (Profile Page): complete
+- Phase 3 (Find Jobs Page): complete
+- Phase 4 (Job Details Page): complete
+- Phase 5 (Dashboard): complete — all 17 features done
+- Build passes clean, type-check passes
 
 ## Next session starts with
 
-Phase 2 — 05 Profile Page: Full UI. Build complete profile page with mock data following build-plan.md:84-99. Includes profile completion indicator, resume upload area, all form fields across 5 sections (Personal Info, Professional Info, Work Experience, Education, Job Preferences).
+All phases complete. Project is fully built per the build plan.
 
 ## Open questions
 
-- PostHog review issues (9 total, 3 critical) from 03 remain unfixed — revisit when PostHog events are needed (Phase 3)
-- profiles FK to auth.users not showing in foreignKeys output — may be silently skipped. Functionally not critical since app sets id, but worth revisiting
+None.

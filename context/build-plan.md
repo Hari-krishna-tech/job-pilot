@@ -117,7 +117,7 @@ Wire profile form to InsForge DB.
 
 ### 07 AI Profile Extraction from Resume
 
-Extract from Resume button — Deepseek reads uploaded PDF and auto-fills profile form fields.
+Extract from Resume button — Deepseek reads uploaded PDF and auto-fills profile form fields. as deepseek can't accept pdf as input, write a program to extract text from the pdf, and send to deepseek to file the field.
 
 **UI:**
 
@@ -138,7 +138,7 @@ Extract from Resume button — Deepseek reads uploaded PDF and auto-fills profil
 
 ### 08 Resume PDF Generation from Profile
 
-Generate a clean professional PDF resume from current profile data using Deepseek.
+Generate a clean professional PDF resume from current profile data using Deepseek. as deepseek can't generate pdf, get the output as the md file from deepseek and generate the pdf.
 
 **Logic:**
 

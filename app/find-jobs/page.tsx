@@ -1,25 +1,36 @@
 import { redirect } from "next/navigation";
 import { createInsforgeServer } from "@/lib/insforge-server";
+import { SearchControls } from "@/components/find-jobs/SearchControls";
+import { FindJobsClient } from "@/components/find-jobs/FindJobsClient";
+import type { JobRow } from "@/types";
 
 export default async function FindJobsPage() {
-  try {
-    const insforge = await createInsforgeServer();
-    const {
-      data: { user },
-      error,
-    } = await insforge.auth.getCurrentUser();
+  const insforge = await createInsforgeServer();
+  const {
+    data: { user },
+    error,
+  } = await insforge.auth.getCurrentUser();
 
-    if (error || !user) redirect("/login");
-  } catch (err) {
-    console.error("[find-jobs]", err);
-    redirect("/login");
-  }
+  if (error || !user) redirect("/login");
+
+  const { data: jobs } = await insforge.database
+    .from("jobs")
+    .select("*")
+    .eq("user_id", user.id)
+    .order("found_at", { ascending: false });
+
+  const jobList = (jobs || []) as JobRow[];
 
   return (
     <div className="mx-auto max-w-[1440px] p-8">
-      <h1 className="text-base font-semibold leading-6 text-text-primary">
+      <h1 className="mb-6 text-base font-semibold leading-6 text-text-primary">
         Find Jobs
       </h1>
+
+      <div className="space-y-6">
+        <SearchControls />
+        <FindJobsClient jobs={jobList} />
+      </div>
     </div>
   );
 }

@@ -12,7 +12,9 @@ export const ANALYTICS_EVENTS = {
 
   // Job Finding
   FIND_JOBS_PAGE_VIEWED: "find_jobs_page_viewed",
+  JOB_SEARCH_STARTED: "job_search_started",
   JOB_SEARCH_PERFORMED: "job_search_performed",
+  JOB_FOUND: "job_found",
   JOB_FILTER_APPLIED: "job_filter_applied",
   JOB_FILTER_REMOVED: "job_filter_removed",
   JOB_DETAILS_VIEWED: "job_details_viewed",
@@ -21,6 +23,7 @@ export const ANALYTICS_EVENTS = {
   JOB_UNSAVED: "job_unsaved",
   JOB_SHARED: "job_shared",
   JOB_RESEARCH_VIEWED: "job_research_viewed",
+  COMPANY_RESEARCHED: "company_researched",
   JOB_COMPANY_DOSSIER_GENERATED: "company_dossier_generated",
 
   // Profile
@@ -40,3 +43,5 @@ export const ANALYTICS_EVENTS = {
 
 export type AnalyticsEventName =
   (typeof ANALYTICS_EVENTS)[keyof typeof ANALYTICS_EVENTS];
+
+export type EventProperties = Record<string, unknown>;

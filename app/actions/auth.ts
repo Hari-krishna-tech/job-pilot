@@ -12,5 +12,5 @@ export async function logoutAction() {
   cookieStore.delete("insforge_access_token");
   cookieStore.delete("insforge_refresh_token");
 
-  redirect("/login");
+  redirect("/");
 }

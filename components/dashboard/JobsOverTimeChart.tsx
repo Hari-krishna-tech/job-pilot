@@ -1,0 +1,62 @@
+"use client";
+
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+} from "recharts";
+
+export type ChartDatum = { label: string; value: number };
+
+type Props = {
+  data: ChartDatum[];
+};
+
+function EmptyState() {
+  return (
+    <p className="text-xs leading-4 text-text-muted">No jobs found yet</p>
+  );
+}
+
+export function JobsOverTimeChart({ data }: Props) {
+  if (data.length === 0) return <EmptyState />;
+
+  return (
+    <ResponsiveContainer width="100%" height={200}>
+      <LineChart data={data} margin={{ top: 8, right: 8, bottom: 0, left: 0 }}>
+        <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" />
+        <XAxis
+          dataKey="label"
+          tick={{ fontSize: 11, fill: "#9CA3AF" }}
+          axisLine={{ stroke: "var(--color-border)" }}
+          tickLine={false}
+        />
+        <YAxis
+          tick={{ fontSize: 11, fill: "#9CA3AF" }}
+          axisLine={false}
+          tickLine={false}
+          allowDecimals={false}
+        />
+        <Tooltip
+          contentStyle={{
+            border: "1px solid var(--color-border)",
+            borderRadius: 8,
+            fontSize: 12,
+          }}
+        />
+        <Line
+          type="monotone"
+          dataKey="value"
+          stroke="#7C5CFC"
+          strokeWidth={3}
+          dot={{ r: 3, fill: "#7C5CFC", strokeWidth: 0 }}
+          activeDot={{ r: 5, fill: "#7C5CFC", strokeWidth: 2, stroke: "#FFFFFF" }}
+        />
+      </LineChart>
+    </ResponsiveContainer>
+  );
+}
