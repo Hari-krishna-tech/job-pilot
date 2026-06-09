@@ -63,7 +63,7 @@ export function FindJobsClient({ jobs }: Props) {
 
   return (
     <>
-      <div className="rounded-2xl border border-border bg-surface p-6 shadow-[0px_1px_3px_rgba(0,0,0,0.1),0px_1px_2px_-1px_rgba(0,0,0,0.1)]">
+      <div className="rounded-2xl border border-border bg-surface p-4 sm:p-6 shadow-[0px_1px_3px_rgba(0,0,0,0.1),0px_1px_2px_-1px_rgba(0,0,0,0.1)]">
         <JobFilters
           textFilter={textFilter}
           matchFilter={matchFilter}

@@ -64,12 +64,12 @@ export function SearchControls() {
 
   return (
     <div className="space-y-4">
-      <div className="rounded-2xl border border-border bg-surface p-6 shadow-[0px_1px_3px_rgba(0,0,0,0.1),0px_1px_2px_-1px_rgba(0,0,0,0.1)]">
+      <div className="rounded-2xl border border-border bg-surface p-4 sm:p-6 shadow-[0px_1px_3px_rgba(0,0,0,0.1),0px_1px_2px_-1px_rgba(0,0,0,0.1)]">
         <div className="grid grid-cols-1 gap-4 md:grid-cols-[1fr_1fr_1fr_auto] md:items-end">
           <div>
             <label
               htmlFor="job-title"
-              className="mb-1.5 block text-sm font-medium text-text-dark"
+              className="mb-1.5 block text-xs font-medium text-text-dark sm:text-sm"
             >
               JOB TITLE
             </label>
@@ -93,7 +93,7 @@ export function SearchControls() {
           <div>
             <label
               htmlFor="location"
-              className="mb-1.5 block text-sm font-medium text-text-dark"
+              className="mb-1.5 block text-xs font-medium text-text-dark sm:text-sm"
             >
               LOCATION
             </label>
@@ -117,7 +117,7 @@ export function SearchControls() {
           <div>
             <label
               htmlFor="experience"
-              className="mb-1.5 block text-sm font-medium text-text-dark"
+              className="mb-1.5 block text-xs font-medium text-text-dark sm:text-sm"
             >
               EXPERIENCE
             </label>
@@ -145,7 +145,7 @@ export function SearchControls() {
           <button
             onClick={handleFindJobs}
             disabled={isPending || !jobTitle.trim()}
-            className="flex h-[38px] items-center gap-2 rounded-md bg-accent px-4 py-2 text-sm font-medium text-accent-foreground transition-opacity hover:opacity-90 disabled:opacity-50"
+            className="flex h-[38px] w-full items-center justify-center gap-2 rounded-md bg-accent px-4 py-2 text-sm font-medium text-accent-foreground transition-opacity hover:opacity-90 disabled:opacity-50 md:w-auto"
           >
             {isPending ? (
               <Loader2 className="h-4 w-4 animate-spin" />

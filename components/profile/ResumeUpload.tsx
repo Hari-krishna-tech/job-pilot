@@ -56,13 +56,13 @@ export function ResumeUpload({ resumeUrl, onFileChange, onExtract, extracting, o
   };
 
   return (
-    <div className="rounded-2xl border border-border bg-surface p-6 shadow-[0px_1px_3px_rgba(0,0,0,0.1),0px_1px_2px_-1px_rgba(0,0,0,0.1)]">
+    <div className="rounded-2xl border border-border bg-surface p-4 sm:p-6 shadow-[0px_1px_3px_rgba(0,0,0,0.1),0px_1px_2px_-1px_rgba(0,0,0,0.1)]">
       <h2 className="text-base font-semibold leading-6 text-text-primary">
         Resume
       </h2>
 
       <div
-        className={`mt-4 flex flex-col items-center justify-center rounded-lg border-2 border-dashed p-8 transition-colors ${
+        className={`mt-4 flex flex-col items-center justify-center rounded-lg border-2 border-dashed p-6 sm:p-8 transition-colors ${
           dragActive
             ? "border-accent bg-accent-muted"
             : "border-border-muted bg-surface-secondary"
@@ -140,7 +140,7 @@ export function ResumeUpload({ resumeUrl, onFileChange, onExtract, extracting, o
         )}
       </div>
 
-      <div className="mt-4 flex gap-3">
+      <div className="mt-4 flex flex-wrap gap-3">
         <input
           ref={inputRef}
           type="file"
@@ -151,7 +151,7 @@ export function ResumeUpload({ resumeUrl, onFileChange, onExtract, extracting, o
         <button
           type="button"
           onClick={handleFileSelect}
-          className="rounded-md border border-border bg-surface px-4 py-2 text-sm font-medium text-text-primary hover:bg-surface-secondary transition-colors"
+          className="rounded-md border border-border bg-surface px-4 py-2 text-sm font-medium text-text-primary hover:bg-surface-secondary transition-colors w-full sm:w-auto"
         >
           Select Resume
         </button>
@@ -160,7 +160,7 @@ export function ResumeUpload({ resumeUrl, onFileChange, onExtract, extracting, o
             type="button"
             onClick={onExtract}
             disabled={extracting}
-            className="inline-flex items-center gap-2 rounded-md bg-accent px-4 py-2 text-sm font-medium text-accent-foreground hover:opacity-90 transition-opacity disabled:opacity-50"
+            className="inline-flex w-full items-center justify-center gap-2 rounded-md bg-accent px-4 py-2 text-sm font-medium text-accent-foreground hover:opacity-90 transition-opacity disabled:opacity-50 sm:w-auto"
           >
             {extracting && <Loader2 className="h-4 w-4 animate-spin" />}
             {extracting ? "Extracting..." : "Extract from Resume"}
@@ -170,7 +170,7 @@ export function ResumeUpload({ resumeUrl, onFileChange, onExtract, extracting, o
           type="button"
           onClick={onGenerate}
           disabled={generating}
-          className="inline-flex items-center gap-2 rounded-md bg-accent px-4 py-2 text-sm font-medium text-accent-foreground hover:opacity-90 transition-opacity disabled:opacity-50"
+          className="inline-flex w-full items-center justify-center gap-2 rounded-md bg-accent px-4 py-2 text-sm font-medium text-accent-foreground hover:opacity-90 transition-opacity disabled:opacity-50 sm:w-auto"
         >
           {generating && <Loader2 className="h-4 w-4 animate-spin" />}
           {!generating && <Sparkles className="h-4 w-4" />}

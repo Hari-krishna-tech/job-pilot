@@ -32,7 +32,7 @@ export default async function JobDetailsPage({ params }: Props) {
 
   if (!job) {
     return (
-      <div className="mx-auto max-w-[1440px] p-8">
+      <div className="mx-auto max-w-[1440px] px-4 py-6 sm:p-8">
         <h1 className="text-base font-semibold leading-6 text-text-primary">
           Job not found
         </h1>
@@ -41,7 +41,7 @@ export default async function JobDetailsPage({ params }: Props) {
   }
 
   return (
-    <div className="mx-auto max-w-[1440px] p-8">
+    <div className="mx-auto max-w-[1440px] px-4 py-6 sm:p-8">
       <div className="space-y-6">
         <JobInfo job={job} />
         <MatchScore job={job} />

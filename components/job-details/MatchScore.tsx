@@ -3,7 +3,7 @@ import type { JobRow } from "@/types";
 
 export function MatchScore({ job }: { job: JobRow }) {
   return (
-    <div className="rounded-2xl border border-border bg-surface p-6 shadow-[0px_1px_3px_rgba(0,0,0,0.1),0px_1px_2px_-1px_rgba(0,0,0,0.1)]">
+    <div className="rounded-2xl border border-border bg-surface p-4 sm:p-6 shadow-[0px_1px_3px_rgba(0,0,0,0.1),0px_1px_2px_-1px_rgba(0,0,0,0.1)]">
       <div className="flex items-center gap-2">
         <Sparkles className="h-5 w-5 text-accent" />
         <h2 className="text-base font-semibold leading-6 text-text-primary">

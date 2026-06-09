@@ -1,7 +1,7 @@
 export function Testimonial() {
   return (
     <section className="bg-background">
-      <div className="mx-auto max-w-[1440px] px-6 py-24">
+      <div className="mx-auto max-w-[1440px] px-4 py-16 sm:px-6 sm:py-24">
         <div className="mx-auto max-w-3xl text-center">
           <blockquote>
             <p className="text-xl font-medium leading-8 text-text-primary">

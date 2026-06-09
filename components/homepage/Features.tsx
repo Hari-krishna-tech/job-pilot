@@ -72,7 +72,7 @@ const features = [
 export function Features() {
   return (
     <section className="bg-surface">
-      <div className="mx-auto max-w-[1440px] px-6 py-24">
+      <div className="mx-auto max-w-[1440px] px-4 py-16 sm:px-6 sm:py-24">
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="text-[30px] font-semibold leading-9 text-text-primary">
             Everything You Need to Land the Job

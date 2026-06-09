@@ -24,7 +24,7 @@ export function JobFilters({
 }: Props) {
   return (
     <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-      <div className="relative flex-1 max-w-sm">
+      <div className="relative flex-1 w-full sm:max-w-sm">
         <input
           type="text"
           value={textFilter}

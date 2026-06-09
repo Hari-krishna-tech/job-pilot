@@ -23,7 +23,7 @@ export function CompletionIndicator({ data }: Props) {
 
   if (percentage === 100) {
     return (
-      <div className="rounded-2xl border border-border bg-surface p-6 shadow-[0px_1px_3px_rgba(0,0,0,0.1),0px_1px_2px_-1px_rgba(0,0,0,0.1)]">
+      <div className="rounded-2xl border border-border bg-surface p-4 sm:p-6 shadow-[0px_1px_3px_rgba(0,0,0,0.1),0px_1px_2px_-1px_rgba(0,0,0,0.1)]">
         <div className="flex items-center gap-4">
           <div className="flex h-10 w-10 items-center justify-center rounded-full bg-success-lightest">
             <svg className="h-5 w-5 text-success" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -44,8 +44,8 @@ export function CompletionIndicator({ data }: Props) {
   }
 
   return (
-    <div className="rounded-2xl border border-border bg-surface p-6 shadow-[0px_1px_3px_rgba(0,0,0,0.1),0px_1px_2px_-1px_rgba(0,0,0,0.1)]">
-      <div className="flex items-start gap-6">
+    <div className="rounded-2xl border border-border bg-surface p-4 sm:p-6 shadow-[0px_1px_3px_rgba(0,0,0,0.1),0px_1px_2px_-1px_rgba(0,0,0,0.1)]">
+      <div className="flex flex-col items-start gap-4 sm:flex-row sm:gap-6">
         <div className="relative flex-shrink-0">
           <svg width="80" height="80" viewBox="0 0 80 80">
             <circle

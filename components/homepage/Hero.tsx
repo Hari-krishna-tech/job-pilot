@@ -15,7 +15,7 @@ export function Hero() {
         }}
       />
 
-      <div className="relative mx-auto max-w-[1440px] px-6 pb-20 pt-24 lg:pt-32">
+      <div className="relative mx-auto max-w-[1440px] px-4 pb-16 pt-20 sm:px-6 sm:pb-20 sm:pt-24 lg:pt-32">
         <div className="mx-auto max-w-3xl text-center">
           <h1 className="text-4xl font-bold leading-tight tracking-tight text-text-primary sm:text-5xl lg:text-6xl">
             Find Jobs That{" "}
@@ -29,7 +29,7 @@ export function Hero() {
             more time landing offers.
           </p>
 
-          <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
+          <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:mt-10 sm:flex-row">
             <Link
               href="/login"
               onClick={() => posthog.capture("get_started_clicked", { location: "hero" })}

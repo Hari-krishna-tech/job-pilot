@@ -22,7 +22,7 @@ export default async function FindJobsPage() {
   const jobList = (jobs || []) as JobRow[];
 
   return (
-    <div className="mx-auto max-w-[1440px] p-8">
+    <div className="mx-auto max-w-[1440px] px-4 py-6 sm:p-8">
       <h1 className="mb-6 text-base font-semibold leading-6 text-text-primary">
         Find Jobs
       </h1>

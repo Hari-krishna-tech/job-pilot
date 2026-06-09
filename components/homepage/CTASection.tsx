@@ -6,8 +6,8 @@ import posthog from "posthog-js";
 export function CTASection() {
   return (
     <section className="bg-surface">
-      <div className="mx-auto max-w-[1440px] px-6 py-24">
-        <div className="mx-auto max-w-2xl rounded-2xl border border-border bg-surface-secondary p-12 text-center">
+      <div className="mx-auto max-w-[1440px] px-4 py-16 sm:px-6 sm:py-24">
+        <div className="mx-auto max-w-2xl rounded-2xl border border-border bg-surface-secondary p-6 text-center sm:p-12">
           <h2 className="text-[30px] font-semibold leading-9 text-text-primary">
             Ready to Land Your Next Role?
           </h2>

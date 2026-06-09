@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { createInsforgeServer } from "@/lib/insforge-server";
 import { logoutAction } from "@/app/actions/auth";
+import { MobileNav } from "@/components/layout/MobileNav";
 
 export async function Navbar() {
   let user = null;
@@ -14,9 +15,11 @@ export async function Navbar() {
     console.error("[navbar]", err);
   }
 
+  const isLoggedIn = !!user;
+
   return (
     <header className="sticky top-0 z-50 h-16 w-full bg-surface border-b border-border">
-      <div className="mx-auto flex h-full max-w-[1440px] items-center justify-between px-6">
+      <div className="mx-auto flex h-full max-w-[1440px] items-center justify-between px-4 sm:px-6">
         <Link href={user ? "/dashboard" : "/"} className="flex items-center gap-2">
           <Image
             src="/logo.png"
@@ -26,7 +29,7 @@ export async function Navbar() {
           />
         </Link>
 
-        <nav className="flex items-center gap-8">
+        <nav className="hidden items-center gap-8 md:flex">
           <Link
             href="/dashboard"
             className="text-sm font-medium text-text-dark transition-colors hover:text-accent"
@@ -47,23 +50,26 @@ export async function Navbar() {
           </Link>
         </nav>
 
-        {user ? (
-          <form action={logoutAction}>
-            <button
-              type="submit"
-              className="rounded-md bg-overlay-dark px-4 py-2 text-sm font-medium text-surface transition-opacity hover:opacity-90"
+        <div className="flex items-center gap-2">
+          {user ? (
+            <form action={logoutAction} className="hidden md:block">
+              <button
+                type="submit"
+                className="rounded-md bg-overlay-dark px-4 py-2 text-sm font-medium text-surface transition-opacity hover:opacity-90"
+              >
+                Logout
+              </button>
+            </form>
+          ) : (
+            <Link
+              href="/login"
+              className="hidden rounded-md bg-overlay-dark px-4 py-2 text-sm font-medium text-surface transition-opacity hover:opacity-90 md:block"
             >
-              Logout
-            </button>
-          </form>
-        ) : (
-          <Link
-            href="/login"
-            className="rounded-md bg-overlay-dark px-4 py-2 text-sm font-medium text-surface transition-opacity hover:opacity-90"
-          >
-            Start for free
-          </Link>
-        )}
+              Start for free
+            </Link>
+          )}
+          <MobileNav user={isLoggedIn} />
+        </div>
       </div>
     </header>
   );

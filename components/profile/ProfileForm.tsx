@@ -266,7 +266,7 @@ export function ProfileForm({ initialData, resumeUrl }: Props) {
       />
 
       {/* Personal Info */}
-      <section className="rounded-2xl border border-border bg-surface p-6 shadow-[0px_1px_3px_rgba(0,0,0,0.1),0px_1px_2px_-1px_rgba(0,0,0,0.1)]">
+      <section className="rounded-2xl border border-border bg-surface p-4 sm:p-6 shadow-[0px_1px_3px_rgba(0,0,0,0.1),0px_1px_2px_-1px_rgba(0,0,0,0.1)]">
         <h2 className="text-base font-semibold leading-6 text-text-primary">
           Personal Info
         </h2>
@@ -350,7 +350,7 @@ export function ProfileForm({ initialData, resumeUrl }: Props) {
       </section>
 
       {/* Professional Info */}
-      <section className="rounded-2xl border border-border bg-surface p-6 shadow-[0px_1px_3px_rgba(0,0,0,0.1),0px_1px_2px_-1px_rgba(0,0,0,0.1)]">
+      <section className="rounded-2xl border border-border bg-surface p-4 sm:p-6 shadow-[0px_1px_3px_rgba(0,0,0,0.1),0px_1px_2px_-1px_rgba(0,0,0,0.1)]">
         <h2 className="text-base font-semibold leading-6 text-text-primary">
           Professional Info
         </h2>
@@ -415,7 +415,7 @@ export function ProfileForm({ initialData, resumeUrl }: Props) {
       </section>
 
       {/* Work Experience */}
-      <section className="rounded-2xl border border-border bg-surface p-6 shadow-[0px_1px_3px_rgba(0,0,0,0.1),0px_1px_2px_-1px_rgba(0,0,0,0.1)]">
+      <section className="rounded-2xl border border-border bg-surface p-4 sm:p-6 shadow-[0px_1px_3px_rgba(0,0,0,0.1),0px_1px_2px_-1px_rgba(0,0,0,0.1)]">
         <div className="flex items-center justify-between">
           <h2 className="text-base font-semibold leading-6 text-text-primary">
             Work Experience
@@ -560,7 +560,7 @@ export function ProfileForm({ initialData, resumeUrl }: Props) {
       </section>
 
       {/* Education */}
-      <section className="rounded-2xl border border-border bg-surface p-6 shadow-[0px_1px_3px_rgba(0,0,0,0.1),0px_1px_2px_-1px_rgba(0,0,0,0.1)]">
+      <section className="rounded-2xl border border-border bg-surface p-4 sm:p-6 shadow-[0px_1px_3px_rgba(0,0,0,0.1),0px_1px_2px_-1px_rgba(0,0,0,0.1)]">
         <h2 className="text-base font-semibold leading-6 text-text-primary">
           Education
         </h2>
@@ -641,7 +641,7 @@ export function ProfileForm({ initialData, resumeUrl }: Props) {
       </section>
 
       {/* Job Preferences */}
-      <section className="rounded-2xl border border-border bg-surface p-6 shadow-[0px_1px_3px_rgba(0,0,0,0.1),0px_1px_2px_-1px_rgba(0,0,0,0.1)]">
+      <section className="rounded-2xl border border-border bg-surface p-4 sm:p-6 shadow-[0px_1px_3px_rgba(0,0,0,0.1),0px_1px_2px_-1px_rgba(0,0,0,0.1)]">
         <h2 className="text-base font-semibold leading-6 text-text-primary">
           Job Preferences
         </h2>
@@ -710,7 +710,7 @@ export function ProfileForm({ initialData, resumeUrl }: Props) {
       </section>
 
       {/* Save Button */}
-      <div className="flex items-center justify-end gap-4">
+      <div className="flex flex-col items-end gap-3 sm:flex-row sm:items-center sm:justify-end sm:gap-4">
         {feedback && (
           <p
             className={`text-sm ${
@@ -726,7 +726,7 @@ export function ProfileForm({ initialData, resumeUrl }: Props) {
           type="button"
           onClick={handleSave}
           disabled={saving}
-          className="rounded-md bg-accent px-6 py-2.5 text-sm font-medium text-accent-foreground hover:opacity-90 transition-opacity disabled:opacity-50"
+          className="w-full rounded-md bg-accent px-6 py-2.5 text-sm font-medium text-accent-foreground hover:opacity-90 transition-opacity disabled:opacity-50 sm:w-auto"
         >
           {saving ? "Saving..." : "Save Profile"}
         </button>

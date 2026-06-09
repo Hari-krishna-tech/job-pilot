@@ -256,14 +256,14 @@ export default async function DashboardPage() {
   const chartData = await fetchChartData(user.id);
 
   return (
-    <div className="mx-auto max-w-[1440px] p-8">
+    <div className="mx-auto max-w-[1440px] px-4 py-6 sm:p-8">
       <h1 className="text-base font-semibold leading-6 text-text-primary">
         Dashboard
       </h1>
 
       <div className="mt-6 space-y-6">
         <div className="rounded-2xl border border-border bg-surface p-6 shadow-[0px_1px_3px_rgba(0,0,0,0.1),0px_1px_2px_-1px_rgba(0,0,0,0.1)]">
-          <div className="flex items-start gap-6">
+          <div className="flex flex-col items-start gap-4 sm:flex-row sm:gap-6">
             <div className="relative flex-shrink-0">
               <svg width="80" height="80" viewBox="0 0 80 80">
                 <circle
